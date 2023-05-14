@@ -13,7 +13,8 @@ export class SidenavComponent implements OnInit {
   menuNav = [
     {name: 'Home', route: 'home', icon: 'home'},
     {name: 'Carreras', route: 'carreraTecnica', icon: 'category'},
-    {name: 'Examenes', route: 'home', icon: 'calendar_today'}
+    {name: 'Examenes', route: 'examenAdmision', icon: 'calendar_today'},
+    {name: 'Jornadas', route: 'jornada', icon: 'description'}
   ];
 
   ngOnInit(): void {
