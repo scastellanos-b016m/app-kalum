@@ -14,4 +14,8 @@ export class ExamenAdmisionService {
   getExamenesAdmision() {
     return this.http.get(`${base_url}/examenes-admision`);
   }
+
+  saveExamenAdmision(body: any) {
+    return this.http.post(`${base_url}/examenes-admision/post`, body);
+  }
 }

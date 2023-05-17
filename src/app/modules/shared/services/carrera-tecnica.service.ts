@@ -12,6 +12,10 @@ export class CarreraTecnicaService {
   constructor(private http: HttpClient) { }
 
   getCarrerasTecnicas(){
-    return this.http.get(`${base_url}/carreras-tecnicas`)
+    return this.http.get(`${base_url}/carreras-tecnicas`);
+  }
+
+  saveCarreraTecnica(body: any) {
+    return this.http.post(`${base_url}/carreras-tecnicas/post`, body);
   }
 }

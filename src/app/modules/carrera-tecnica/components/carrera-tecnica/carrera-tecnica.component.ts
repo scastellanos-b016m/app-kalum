@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CarreraTecnicaService } from 'src/app/modules/shared/services/carrera-tecnica.service';
+import { FormCarreraTecnicaComponent } from './form-carrera-tecnica.component';
 
 @Component({
   selector: 'app-carrera-tecnica',
@@ -15,12 +17,16 @@ export class CarreraTecnicaComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private carreraTecnicaService: CarreraTecnicaService){
+  constructor(private carreraTecnicaService: CarreraTecnicaService, public dialog: MatDialog){
 
   }
 
   ngOnInit(): void {
     this.getCarrerasTecnicas();
+  }
+
+  openFormCarreraTecnica() {
+    const dialogRef = this.dialog.open(FormCarreraTecnicaComponent, {width: '450px'});
   }
 
   getCarrerasTecnicas(){

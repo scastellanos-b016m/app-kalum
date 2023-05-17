@@ -2,6 +2,8 @@ import { ExamenAdmisionService } from './../../../shared/services/examen-admisio
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormExamenAdmisionComponent } from './form-examen-admision.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-examen-admision',
@@ -15,12 +17,16 @@ export class ExamenAdmisionComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private ExamenAdmisionService: ExamenAdmisionService) {
+  constructor(private ExamenAdmisionService: ExamenAdmisionService, public dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
     this.getExamenesAdmision();
+  }
+
+  openFormExamenAdmision() {
+    const dialogRef = this.dialog.open(FormExamenAdmisionComponent, {width: '450px'});
   }
 
   getExamenesAdmision() {
