@@ -1,7 +1,9 @@
 import { JornadaService } from './../../../shared/services/jornada.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormJornadaComponent } from './form-jornada.component';
 
 @Component({
   selector: 'app-jornada',
@@ -15,12 +17,16 @@ export class JornadaComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private JornadaService: JornadaService){
+  constructor(private JornadaService: JornadaService, public dialog: MatDialog){
 
   }
 
   ngOnInit(): void {
     this.getJornadas();
+  }
+
+  openFormJornada() {
+    const dialogRef = this.dialog.open(FormJornadaComponent, {width: '450px'});
   }
 
   getJornadas() {

@@ -14,4 +14,8 @@ export class JornadaService {
   getJornadas(){
     return this.http.get(`${base_url}/jornadas`)
   }
+
+  saveJornada(body: any) {
+    return this.http.post(`${base_url}/jornadas/post`, body)
+  }
 }
