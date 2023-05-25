@@ -1,7 +1,7 @@
 import { JornadaService } from 'src/app/modules/shared/services/jornada.service';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-form-jornada',
@@ -10,14 +10,28 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class FormJornadaComponent {
   public jornadaForm: FormGroup;
+  estadoFormulario: string = 'Agregar';
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<FormJornadaComponent>,
-    private jornadaService: JornadaService) {
+    private jornadaService: JornadaService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(data);
 
     this.jornadaForm = this.fb.group({
       nombreCorto: ['', Validators.required],
       descripcion: ['', Validators.required]
     })
+
+    if (data != null) {
+      this.estadoFormulario = 'Actualizar';
+      this.updateForm(data);
+    }
+  }
+
+  updateForm(data: any) {
+    this.jornadaForm = this.fb.group({
+      nombreCorto: [data.nombreCorto, Validators.required],
+      descripcion: [data.descripcion, Validators.required]
+    });
   }
 
   onSave() {

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExamenAdmisionService } from 'src/app/modules/shared/services/examen-admision.service';
 
 @Component({
@@ -10,13 +10,26 @@ import { ExamenAdmisionService } from 'src/app/modules/shared/services/examen-ad
 })
 export class FormExamenAdmisionComponent {
   public examenAdmisionForm: FormGroup;
+  estadoFormulario: string = 'Agregar';
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<FormExamenAdmisionComponent>,
-    private examenAdmisionService: ExamenAdmisionService) {
+    private examenAdmisionService: ExamenAdmisionService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(data);
 
     this.examenAdmisionForm = this.fb.group({
       examenAdmision: ['', Validators.required]
     })
+
+    if (data != null) {
+      this.estadoFormulario = 'Actualizar';
+      this.updateForm(data);
+    }
+  }
+
+  updateForm(data: any) {
+    this.examenAdmisionForm = this.fb.group({
+      examenAdmision: [data.fechaExamen, Validators.required]
+    });
   }
 
   onSave() {

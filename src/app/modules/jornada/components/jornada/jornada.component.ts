@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormJornadaComponent } from './form-jornada.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-jornada',
@@ -33,6 +34,36 @@ export class JornadaComponent implements OnInit {
     this.JornadaService.getJornadas().subscribe(data => {
       console.log(data);
       this.processJornadaResponse(data);
+    });
+  }
+
+  deleteJornada(jornadaId: any) {
+    Swal.fire({
+      title: 'Jornadas',
+      text: '¿Esta seguro de eliminar el registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      reverseButtons: true
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.JornadaService.deleteJornada(jornadaId).subscribe((data: any) => {
+          if (data.httpStatusCode == 503) {
+            Swal.fire('Jornadas', data.mensaje, 'error');
+          } else {
+            Swal.fire('Jornadas', 'Registro eliminado', 'success');
+          }
+          this.getJornadas();
+        })
+      }
+    })
+  }
+
+  editJornada(jornadaId: string, nombreCorto: string, descripcion: string) {
+    const dialogRef = this.dialog.open(FormJornadaComponent, {
+      width: '450px',
+      data: {jornadaId: jornadaId, nombreCorto: nombreCorto, descripcion: descripcion}
     });
   }
 

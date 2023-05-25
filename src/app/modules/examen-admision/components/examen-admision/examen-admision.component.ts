@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormExamenAdmisionComponent } from './form-examen-admision.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-examen-admision',
@@ -33,6 +34,36 @@ export class ExamenAdmisionComponent implements OnInit {
     this.ExamenAdmisionService.getExamenesAdmision().subscribe(data => {
       console.log(data);
       this.processExamenesAdmisionResponse(data);
+    });
+  }
+
+  deleteExamenAdmision(examenId: any) {
+    Swal.fire({
+      title: 'Examenes Admisión',
+      text: '¿Esta seguro de eliminar el registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      reverseButtons: true
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.ExamenAdmisionService.deleteExamenAdmision(examenId).subscribe((data: any) => {
+          if (data.httpStatusCode == 503) {
+            Swal.fire('Examenes Admisión', data.mensaje, 'error');
+          } else {
+            Swal.fire('Examenes Admisión', 'Registro eliminado', 'success');
+          }
+          this.getExamenesAdmision();
+        })
+      }
+    })
+  }
+
+  editCarreraTecnica(examenId: string, fechaExamen: string) {
+    const dialogRef = this.dialog.open(FormExamenAdmisionComponent, {
+      width: '450px',
+      data: {examenId: examenId, fechaExamen: fechaExamen}
     });
   }
 

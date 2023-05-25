@@ -18,4 +18,14 @@ export class CarreraTecnicaService {
   saveCarreraTecnica(body: any) {
     return this.http.post(`${base_url}/carreras-tecnicas/post`, body);
   }
+
+  deleteCarreraTecnica(id: any) {
+    const endPoint = `${base_url}/carreras-tecnicas/${id}`;
+    return this.http.delete(endPoint);
+  }
+
+  updateCarreraTecnica(body: any, id: any) {
+    const endPoint = `${base_url}/carreras-tecnicas/${id}`;
+    return this.http.put(endPoint, body);
+  }
 }

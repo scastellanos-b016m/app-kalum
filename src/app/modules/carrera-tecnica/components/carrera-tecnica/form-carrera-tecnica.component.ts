@@ -1,6 +1,6 @@
 import { CarreraTecnicaService } from './../../../shared/services/carrera-tecnica.service';
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,13 +10,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormCarreraTecnicaComponent {
   public carreraTecnicaForm: FormGroup;
+  estadoFormulario: string = 'Agregar';
 
   constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<FormCarreraTecnicaComponent>,
-    private carreraTecnicaService: CarreraTecnicaService) {
+    private carreraTecnicaService: CarreraTecnicaService, @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log(data);
 
     this.carreraTecnicaForm = this.fb.group({
       carreraTecnica: ['', Validators.required]
     })
+    if (data != null) {
+      this.estadoFormulario = 'Actualizar';
+      this.updateForm(data);
+    }
+  }
+
+  updateForm(data: any) {
+    this.carreraTecnicaForm = this.fb.group({
+      carreraTecnica: [data.nombre, Validators.required]
+    });
   }
 
   onSave() {

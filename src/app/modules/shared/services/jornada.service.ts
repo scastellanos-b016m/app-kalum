@@ -18,4 +18,14 @@ export class JornadaService {
   saveJornada(body: any) {
     return this.http.post(`${base_url}/jornadas/post`, body)
   }
+
+  deleteJornada(id: any) {
+    const endPoint = `${base_url}/jornadas/${id}`;
+    return this.http.delete(endPoint);
+  }
+
+  updateJornada(body: any, id: any) {
+    const endPoint = `${base_url}/jornadas/${id}`;
+    return this.http.put(endPoint, body);
+  }
 }

@@ -18,4 +18,14 @@ export class ExamenAdmisionService {
   saveExamenAdmision(body: any) {
     return this.http.post(`${base_url}/examenes-admision/post`, body);
   }
+
+  deleteExamenAdmision(id: any) {
+    const endPoint = `${base_url}/examenes-admision/${id}`;
+    return this.http.delete(endPoint);
+  }
+
+  updateExamenAdmision(body: any, id: any) {
+    const endPoint = `${base_url}/examenes-admision/${id}`;
+    return this.http.put(endPoint, body);
+  }
 }
