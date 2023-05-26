@@ -19,11 +19,11 @@
     </mat-card-header>
     <mat-card-content>
       <table mat-table class="mat-cell" [dataSource]="dataSource">
-        <ng-container matColumnDef="carreraId">
-          <th mat-header-cell *matHeaderCellDef>CODIGO</th>
-          <td mat-cell *matCellDef="let element">
+        <ng-container matColumnDef="number">
+          <th class="text-center" mat-header-cell *matHeaderCellDef>No.</th>
+          <td class="text-center" mat-cell *matCellDef="let element">
             <ng-container *ngIf="element">
-              {{element.carreraId}}
+              {{element.number}}
             </ng-container>
           </td>
         </ng-container>

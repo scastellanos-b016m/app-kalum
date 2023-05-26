@@ -33,10 +33,17 @@ export class FormCarreraTecnicaComponent {
 
   onSave() {
     let data = {
+      carreraId: "xx",
       nombre: this.carreraTecnicaForm.get('carreraTecnica')?.value
     }
 
-    if (data != null) {
+    if(this.estadoFormulario === 'Actualizar') {
+      this.carreraTecnicaService.updateCarreraTecnica(data, this.data.carreraId).subscribe({
+        next: (data) => this.dialogRef.close(1),
+        error: (error) => this.dialogRef.close(2),
+        complete: () => console.log('Proceso finalizado')
+      });
+    } else {
       this.carreraTecnicaService.saveCarreraTecnica(data).subscribe(response => {
         console.log(response);
         this.dialogRef.close(1);

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carrera-tecnica.component.css']
 })
 export class CarreraTecnicaComponent implements OnInit {
-  displayColumns: string[] = ['carreraId', 'nombre', 'acciones'];
+  displayColumns: string[] = ['number', 'nombre', 'acciones'];
   dataSource = new MatTableDataSource<CarreraTecnicaElement>();
 
   @ViewChild(MatPaginator)
@@ -74,13 +74,24 @@ export class CarreraTecnicaComponent implements OnInit {
       width: '450px',
       data: {carreraId: carreraId, nombre: nombre}
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 1) {
+        Swal.fire('Carreras Técnicas', 'Registro almacenado correctamente', 'success');
+        this.getCarrerasTecnicas();
+      } else if (result == 2) {
+        Swal.fire('Carreras Técnicas','Ups!!! se genero un error al modificar el registro', 'error');
+      }
+    });
   }
 
   processCarreraTecnicaResponse(data: any) {
     const dataCarreraTecnica: CarreraTecnicaElement[] = [];
     let listCarreraTecnica = data;
+    let number = 1;
     listCarreraTecnica.forEach((element: CarreraTecnicaElement) => {
+      element.number = number;
       dataCarreraTecnica.push(element);
+      number++;
     });
     this.dataSource = new MatTableDataSource<CarreraTecnicaElement>(dataCarreraTecnica);
     this.dataSource.paginator = this.paginator;
@@ -89,6 +100,7 @@ export class CarreraTecnicaComponent implements OnInit {
 }
 
 export interface CarreraTecnicaElement {
+  number: number,
   carreraId: string,
   nombre: string
 }
