@@ -28,6 +28,14 @@ export class ExamenAdmisionComponent implements OnInit {
 
   openFormExamenAdmision() {
     const dialogRef = this.dialog.open(FormExamenAdmisionComponent, {width: '450px'});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ==1) {
+        Swal.fire('Examenes Admisión', 'Registro almacenado correctamente', 'success');
+        this.getExamenesAdmision();
+      } else if (result == 2) {
+        Swal.fire('Examenes Admisión', 'Error al agregar el registro', 'error');
+      }
+    });
   }
 
   getExamenesAdmision() {
@@ -55,15 +63,23 @@ export class ExamenAdmisionComponent implements OnInit {
             Swal.fire('Examenes Admisión', 'Registro eliminado', 'success');
           }
           this.getExamenesAdmision();
-        })
+        });
       }
-    })
+    });
   }
 
   editCarreraTecnica(examenId: string, fechaExamen: string) {
     const dialogRef = this.dialog.open(FormExamenAdmisionComponent, {
       width: '450px',
       data: {examenId: examenId, fechaExamen: fechaExamen}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 1) {
+        Swal.fire('Examenes Admisión', 'Registro almacenado correctamente', 'success');
+        this.getExamenesAdmision();
+      } else if (result == 2) {
+        Swal.fire('Examenes Admisión','Ups!!! se genero un error al modificar el registro', 'error');
+      }
     });
   }
 

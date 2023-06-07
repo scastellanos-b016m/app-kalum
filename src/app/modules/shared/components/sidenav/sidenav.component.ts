@@ -1,5 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormLoginComponent } from 'src/app/modules/login/components/form-login.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,8 +22,12 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(media: MediaMatcher) {
+  constructor(media: MediaMatcher, public dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-witdth: 600px)');
+  }
+
+  openFormLogin(){
+    const dialogRef = this.dialog.open(FormLoginComponent, {width: '450px'});
   }
 
 }

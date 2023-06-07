@@ -37,7 +37,13 @@ export class FormExamenAdmisionComponent {
       fechaExamen: this.examenAdmisionForm.get('examenAdmision')?.value
     }
 
-    if (data != null) {
+    if (this.estadoFormulario === 'Actualizar') {
+      this.examenAdmisionService.updateExamenAdmision(data, this.data.examenId).subscribe({
+        next: (data) => this.dialogRef.close(1),
+        error: (error) => this.dialogRef.close(2),
+        complete: () => console.log('Proceso finalizado')
+      });
+    } else {
       this.examenAdmisionService.saveExamenAdmision(data).subscribe(response => {
         console.log(response);
         this.dialogRef.close(1);

@@ -36,13 +36,18 @@ export class FormJornadaComponent {
 
   onSave() {
     let data = {
+      jornadaId: "xx",
       nombreCorto: this.jornadaForm.get('nombreCorto')?.value,
       descripcion: this.jornadaForm.get('descripcion')?.value
     }
 
-    console.log(data);
-
-    if (data != null) {
+    if (this.estadoFormulario === 'Actualizar') {
+      this.jornadaService.updateJornada(data, this.data.jornadaId).subscribe({
+        next: (data) => this.dialogRef.close(1),
+        error: (error) => this.dialogRef.close(2),
+        complete: () => console.log('Proceso finalizado')
+      });
+    } else {
       this.jornadaService.saveJornada(data).subscribe(response => {
         console.log(response);
         this.dialogRef.close(1);

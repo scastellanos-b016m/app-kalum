@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CarreraTecnicaModule } from '../carrera-tecnica/carrera-tecnica.module';
 import { JornadaModule } from '../jornada/jornada.module';
 import { ExamenAdmisionModule } from '../examen-admision/examen-admision.module';
+import { LoginModule } from '../login/login.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ExamenAdmisionModule } from '../examen-admision/examen-admision.module'
     SharedModule,
     CarreraTecnicaModule,
     JornadaModule,
-    ExamenAdmisionModule
+    ExamenAdmisionModule,
+    LoginModule
   ]
 })
 export class DashboardModule { }

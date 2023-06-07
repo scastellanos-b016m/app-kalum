@@ -28,6 +28,14 @@ export class JornadaComponent implements OnInit {
 
   openFormJornada() {
     const dialogRef = this.dialog.open(FormJornadaComponent, {width: '450px'});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 1) {
+        Swal.fire('Jornadas', 'Registro almacenado correctamente', 'success');
+        this.getJornadas();
+      } else if (result == 2) {
+        Swal.fire('Jornadas', 'Error al agregar el registro', 'error');
+      }
+    })
   }
 
   getJornadas() {
@@ -64,6 +72,14 @@ export class JornadaComponent implements OnInit {
     const dialogRef = this.dialog.open(FormJornadaComponent, {
       width: '450px',
       data: {jornadaId: jornadaId, nombreCorto: nombreCorto, descripcion: descripcion}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 1) {
+        Swal.fire('Jornadas', 'Registro almacenado correctamente', 'success');
+        this.getJornadas();
+      } else if (result == 2) {
+        Swal.fire('Jornadas','Ups!!! se genero un error al modificar el registro', 'error');
+      }
     });
   }
 

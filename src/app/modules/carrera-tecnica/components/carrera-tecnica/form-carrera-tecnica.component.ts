@@ -33,7 +33,7 @@ export class FormCarreraTecnicaComponent {
 
   onSave() {
     let data = {
-      carreraId: "xx",
+      // carreraId: "xx",
       nombre: this.carreraTecnicaForm.get('carreraTecnica')?.value
     }
 
