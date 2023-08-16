@@ -12,7 +12,7 @@
       <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
         <ul fxLayout="row" fxLayoutGap="20px">
           <li>
-            <button (click)="openFormExamenAdmision()" mat-raised-button color="primary">Agregar Examen</button>
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" (click)="openFormExamenAdmision()" mat-raised-button color="primary">Agregar Examen</button>
           </li>
         </ul>
       </div>
@@ -38,10 +38,10 @@
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
           <td mat-cell *matCellDef="let element; let i=index;">
-            <button mat-icon-button color="accent" (click)="editCarreraTecnica(element.examenId, element.fechaExamen)">
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" mat-icon-button color="accent" (click)="editCarreraTecnica(element.examenId, element.fechaExamen)">
               <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
-            <button mat-icon-button color="accent" (click)="deleteExamenAdmision(element.examenId)">
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" mat-icon-button color="accent" (click)="deleteExamenAdmision(element.examenId)">
               <mat-icon aria-label="Delete">delete</mat-icon>
             </button>
           </td>

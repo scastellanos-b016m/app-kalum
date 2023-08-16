@@ -1,0 +1,8 @@
+.resultado-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.resultado-container > * {
+  width: 100%;
+}

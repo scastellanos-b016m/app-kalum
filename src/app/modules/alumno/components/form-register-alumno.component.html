@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Asignación de Alumno</h2>
+<mat-dialog-content>
+  <form [formGroup]="alumnoFormRegister">
+    <!-- <mat-label>Expediente</mat-label> -->
+    <div class="form-container">
+      <mat-form-field>
+        <input formControlName="NoExpediente" matInput placeholder="Expediente" required>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <!-- <mat-label>Ciclo</mat-label> -->
+      <mat-form-field>
+        <input formControlName="Ciclo" matInput placeholder="Ciclo" required>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Mes de Pago</mat-label>
+        <mat-select formControlName="MesInicioPago">
+          <mat-option *ngFor="let mesPago of meses" [value]="mesPago.value">
+            {{ mesPago.valueView }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Carrera Técnica</mat-label>
+        <mat-select formControlName="carreraId">
+          <mat-option *ngFor="let carrera of carrerasTecnicas" [value]="carrera.carreraId">
+            {{ carrera.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Dia de Pago</mat-label>
+        <mat-select formControlName="DiaPago">
+          <mat-option *ngFor="let diaPago of dias" [value]="diaPago.value">
+            {{ diaPago.valueView }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div>
+    <button mat-button color="primary" (click)="onSave()">
+      <mat-icon>save</mat-icon>Guardar
+    </button>
+    <button mat-button color="primary" (click)="onClose()">
+      <mat-icon>cancel</mat-icon>Cancelar
+    </button>
+  </div>
+</mat-dialog-actions>

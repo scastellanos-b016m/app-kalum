@@ -1,0 +1,102 @@
+<h2 mat-dialog-title>Solicitud de expediente</h2>
+<mat-dialog-content>
+  <form [formGroup]="aspiranteFormRegister">
+    <div class="form-container">
+      <mat-form-field>
+        <input
+          formControlName="apellido"
+          matInput
+          placeholder="Apellidos"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="Nombres"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <input
+          formControlName="direccion"
+          matInput
+          placeholder="Dirección"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <input
+          formControlName="email"
+          type="email"
+          matInput
+          placeholder="Email"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <input
+          formControlName="telefono"
+          matInput
+          placeholder="Telefono"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Carrera Técnica</mat-label>
+        <mat-select formControlName="carreraId">
+          <mat-option
+            *ngFor="let carrera of carrerasTecnicas"
+            [value]="carrera.carreraId"
+          >
+            {{ carrera.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Examen admisión</mat-label>
+        <mat-select formControlName="examenId">
+          <mat-option *ngFor="let examen of examenesAdmision" [value]="examen.examenId">
+            {{ examen.fechaExamen | date : "dd MMMM YYYY HH:mm" }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-container">
+      <mat-form-field>
+        <mat-label>Jornadas</mat-label>
+        <mat-select formControlName="jornadaId">
+          <mat-option *ngFor="let jornada of jornadas" [value]="jornada.jornadaId">
+            {{ jornada.nombreCorto }} | {{ jornada.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-button
+    color="primary"
+    (click)="onSave()"
+    [disabled]="aspiranteFormRegister.invalid"
+  >
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+  <button mat-button color="primary" (click)="onClose()">
+    <mat-icon>cancel</mat-icon> Cancelar
+  </button>
+</mat-dialog-actions>

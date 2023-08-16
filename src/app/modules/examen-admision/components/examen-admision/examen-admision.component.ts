@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormExamenAdmisionComponent } from './form-examen-admision.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/modules/shared/services/auth.service';
 
 @Component({
   selector: 'app-examen-admision',
@@ -18,7 +19,7 @@ export class ExamenAdmisionComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private ExamenAdmisionService: ExamenAdmisionService, public dialog: MatDialog) {
+  constructor(private ExamenAdmisionService: ExamenAdmisionService, public dialog: MatDialog, public authService: AuthService) {
 
   }
 

@@ -1,0 +1,96 @@
+<mat-card>
+  <h2 class="alinear">Listado de Cuentas por Cobrar</h2>
+    <mat-card-header>
+      <div>
+        <mat-form-field hintLabel="Buscar categoria" appearance="fill">
+          <mat-label>Buscar Cuenta</mat-label>
+          <input matInput #input>
+        </mat-form-field>
+      </div>
+    </mat-card-header>
+    <mat-card-header>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <ul fxLayout="row" fxLayoutGap="20px">
+          <li>
+            <!-- <button *ngIf="authService.hasRole('ROLE_ADMIN')" (click)="openFormJornada()" mat-raised-button color="primary">Agregar jornada</button> -->
+            <!-- <button (click)="openExamenAdmisionComponent()" mat-raised-button color="primary">Agregar Resultado</button> -->
+          </li>
+        </ul>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table class="mat-cell" [dataSource]="dataSource">
+        <ng-container matColumnDef="correlativo">
+          <th mat-header-cell *matHeaderCellDef>CODIGO</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.correlativo}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="anio">
+          <th mat-header-cell *matHeaderCellDef>AÑO</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.anio}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>DESCRIPCION</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.descripcion}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaAplica">
+          <th mat-header-cell *matHeaderCellDef>FECHA APLICA</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.fechaAplica}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef>MONTO</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.monto}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="mora">
+          <th mat-header-cell *matHeaderCellDef>MORA</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.mora}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="descuento">
+          <th mat-header-cell *matHeaderCellDef>DESCUENTO</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element">
+              {{element.descuento}}
+            </ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+          <!-- <td mat-cell *matCellDef="let element; let i=index;">
+            <button mat-icon-button color="accent" (click)="editResultadoExamenAdmision(element.noExpediente, element.anio, element.descripcion, element.nota)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="deleteResultadoExamenAdmision(element.noExpediente, element.anio)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </td> -->
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+</mat-card>
+

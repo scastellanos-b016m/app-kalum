@@ -5,6 +5,8 @@ import { MaterialModule } from '../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormCarreraTecnicaComponent } from './components/carrera-tecnica/form-carrera-tecnica.component';
+import { AspiranteModule } from '../aspirante/aspirante.module';
+import { AlumnoModule } from '../alumno/alumno.module';
 
 
 
@@ -18,7 +20,9 @@ import { FormCarreraTecnicaComponent } from './components/carrera-tecnica/form-c
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AspiranteModule,
+    AlumnoModule
   ]
 })
 export class CarreraTecnicaModule { }

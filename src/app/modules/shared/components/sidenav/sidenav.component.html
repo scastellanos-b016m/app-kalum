@@ -7,18 +7,18 @@
         <li>
           <button mat-icon-button><mat-icon class="mat-18">help_outline</mat-icon></button>
         </li>
-        <li>
+        <li *ngIf="authService.isAuthenticated()">
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>person_outline</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>exit_to_app</mat-icon>
               Cerrar sesión
             </button>
           </mat-menu>
         </li>
-        <li>
+        <li *ngIf="!authService.isAuthenticated()">
           <button mat-icon-button [matMenuTriggerFor]="menuLogin">
             <mat-icon>person_outline</mat-icon>
           </button>
@@ -38,15 +38,26 @@
           <mat-nav-list>
             <div class="profile-card">
               <div class="header">
-                <h2>Ivan Castelanos</h2>
-                <h4>sergioivan1191@gmail.com</h4>
+                <h2>{{authService.isAuthenticated() ? authService.usuario.username : 'CAPACÍTATE'}}</h2>
+                <h4>{{authService.isAuthenticated() ? authService.usuario.email : 'El trabajo bien hecho'}}</h4>
               </div>
             </div>
             <mat-divider></mat-divider>
-            <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of menuNav">
+            <!-- <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of menuNav" *ngIf="authService.isAuthenticated() && hasRequiredRole(nav.roles)">
               <mat-icon class="icono">{{nav.icon}}</mat-icon>
               {{nav.name}}
+            </a> -->
+            <!-- <a mat-list-item *ngFor="let nav of menuNav"
+            [routerLink]="nav.route" *ngIf="authService.isAuthenticated() && hasRequiredRole(nav.roles)">
+            <mat-icon class="icono">{{nav.icon}}</mat-icon>
+            {{nav.name}}
+          </a> -->
+          <ng-container *ngFor="let nav of menuNav">
+            <a mat-list-item *ngIf="hasRequiredRole(nav.roles)" [routerLink]="nav.route">
+              <mat-icon class="icono" [style]="nav.style">{{nav.icon}}</mat-icon>
+              {{nav.name}}
             </a>
+          </ng-container>
           </mat-nav-list>
       </mat-sidenav>
       <!-- Body -->
